@@ -51,7 +51,7 @@ jobs:
           
       - name: Run unit tests
         run: |
-          dotnet test SaloAPI.UnitTests/MangoAPI.UnitTests.csproj --configuration Release --no-build
+          dotnet test SaloAPI.UnitTests/SaloAPI.UnitTests.csproj --configuration Release --no-build
         env:
           CollectCoverage: true
           CoverletOutputFormat: lcov
