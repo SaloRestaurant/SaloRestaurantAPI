@@ -9,6 +9,8 @@ public sealed class ImageEntity
     public string FileName { get; set; }
 
     public Guid? ProductId { get; set; }
+    
+    public ProductEntity ProductEntity { get; set; }
 
     public ImageEntity()
     {
@@ -19,6 +21,7 @@ public sealed class ImageEntity
         Guid? productId)
     {
         Id = Guid.NewGuid();
+        
         FileName = filename;
         ProductId = productId;
         

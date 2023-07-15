@@ -18,6 +18,12 @@ public sealed class UserEntity
     
     public byte[] PasswordSalt { get; set; }
 
+    public ICollection<DeliveryAddressEntity> DeliveryAddresses => _deliveryAddresses;
+    private readonly List<DeliveryAddressEntity> _deliveryAddresses;
+    
+    public ICollection<OrderEntity> Orders => _orders;
+    private readonly List<OrderEntity> _orders;
+
     public UserEntity()
     {
     }
@@ -31,6 +37,9 @@ public sealed class UserEntity
         byte[] passwordSalt)
     {
         Id = Guid.NewGuid();
+        _deliveryAddresses = new List<DeliveryAddressEntity>();
+        _orders = new List<OrderEntity>();
+        
         FirstName = firstName;
         LastName = lastName;
         Email = email;

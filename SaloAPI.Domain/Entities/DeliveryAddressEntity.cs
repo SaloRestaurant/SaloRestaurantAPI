@@ -2,7 +2,7 @@
 
 namespace SaloAPI.Domain.Entities;
 
-public sealed class DeliveryEntityAddress
+public sealed class DeliveryAddressEntity
 {
     public Guid Id { get; set; }
     
@@ -17,12 +17,14 @@ public sealed class DeliveryEntityAddress
     public string AdditionalInfo { get; set; }
     
     public Guid? UserId { get; set; }
+    
+    public UserEntity UserEntity { get; set; }
 
-    public DeliveryEntityAddress()
+    public DeliveryAddressEntity()
     {
     }
     
-    public DeliveryEntityAddress(
+    public DeliveryAddressEntity(
         string address, 
         string district, 
         string city, 
@@ -31,6 +33,7 @@ public sealed class DeliveryEntityAddress
         Guid? userId)
     {
         Id = Guid.NewGuid();
+        
         Address = address;
         District = district;
         City = city;
@@ -41,7 +44,7 @@ public sealed class DeliveryEntityAddress
         new DeliveryAddressEntityValidator().ValidateAndThrow(this);
     }
 
-    public static DeliveryEntityAddress Create(
+    public static DeliveryAddressEntity Create(
         string address,
         string district,
         string city,
@@ -49,7 +52,7 @@ public sealed class DeliveryEntityAddress
         string additionalInfo,
         Guid? userId)
     {
-        var newAddress = new DeliveryEntityAddress(address, district, city, zipCode, additionalInfo, userId);
+        var newAddress = new DeliveryAddressEntity(address, district, city, zipCode, additionalInfo, userId);
 
         return newAddress;
     }

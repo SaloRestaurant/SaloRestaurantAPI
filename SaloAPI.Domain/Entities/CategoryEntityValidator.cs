@@ -7,6 +7,6 @@ public class CategoryEntityValidator : AbstractValidator<CategoryEntity>
     public CategoryEntityValidator()
     {
         RuleFor(x => x.Id).NotEmpty();
-        RuleFor(x => x.Name).NotEmpty().Length(2, 50);
+        RuleFor(x => x.Name).NotEmpty().MaximumLength(50);
     }
 }
