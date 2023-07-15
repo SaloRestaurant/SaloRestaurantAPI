@@ -8,6 +8,9 @@ public sealed class CategoryEntity
     
     public string Name { get; set; }
 
+    public ICollection<ProductEntity> Products => _products;
+    private readonly List<ProductEntity> _products;
+
     public CategoryEntity()
     {
     }
@@ -15,6 +18,8 @@ public sealed class CategoryEntity
     public CategoryEntity(string name)
     {
         Id = Guid.NewGuid();
+        _products = new List<ProductEntity>();
+        
         Name = name;
         
         new CategoryEntityValidator().ValidateAndThrow(this);

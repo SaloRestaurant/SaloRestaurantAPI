@@ -1,20 +1,35 @@
 ﻿using Microsoft.OpenApi.Models;
+using SaloAPI.Application.Interfaces;
+using SaloAPI.Application.Services;
+using SaloAPI.BusinessLogic.DependencyInjection;
+using SaloAPI.Domain.Constants;
 using System.Reflection;
+using System.Text.Json;
 
 namespace SaloAPI.Presentation;
 
 public class Startup
 {
+    private readonly IConfiguration configuration;
+    
     public Startup(IConfiguration configuration)
     {
-        Configuration = configuration;
+        this.configuration = configuration;
     }
-
-    public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.WriteIndented = true;
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
+        
+        var databaseUrl = ConfigurationHelper.TryGetFromEnvironment(EnvironmentConstants.DatabaseUrl, configuration);
+        
+        services.AddDatabaseContextServices(databaseUrl);
+        
+        services.AddSingleton<IVersionService, VersionService>();
 
         services.AddSwaggerGen(c =>
         {
@@ -64,5 +79,7 @@ public class Startup
         });
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        
+        app.MigrateDatabase();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SaloAPI.Domain.Entities;
 
-public class DeliveryAddressEntityValidator : AbstractValidator<DeliveryEntityAddress>
+public class DeliveryAddressEntityValidator : AbstractValidator<DeliveryAddressEntity>
 {
     public DeliveryAddressEntityValidator()
     {
@@ -12,5 +12,6 @@ public class DeliveryAddressEntityValidator : AbstractValidator<DeliveryEntityAd
         RuleFor(x => x.City).NotEmpty().MaximumLength(30);
         RuleFor(x => x.ZipCode).NotEmpty().Length(5);
         RuleFor(x => x.AdditionalInfo).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.UserId).NotEmpty();
     }
 }

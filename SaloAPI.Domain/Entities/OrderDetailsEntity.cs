@@ -10,6 +10,10 @@ public class OrderDetailsEntity
     
     public Guid? ProductId { get; set; }
 
+    public OrderEntity OrderEntity { get; set; }
+    
+    public ProductEntity ProductEntity { get; set; }
+
     public OrderDetailsEntity()
     {
     }
@@ -20,6 +24,7 @@ public class OrderDetailsEntity
         Guid? productId)
     {
         Id = Guid.NewGuid();
+        
         Quantity = quantity;
         OrderId = orderId;
         ProductId = productId;

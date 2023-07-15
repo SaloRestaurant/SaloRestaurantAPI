@@ -28,6 +28,7 @@ public sealed class AdministratorEntity
         byte[] passwordSalt)
     {
         Id = Guid.NewGuid();
+        
         FirstName = firstName;
         LastName = lastName;
         Email = email;

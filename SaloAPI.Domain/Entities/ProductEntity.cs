@@ -16,6 +16,13 @@ public sealed class ProductEntity
     
     public Guid? CategoryId { get; set; }
 
+    public CategoryEntity CategoryEntity { get; set; }
+    
+    public OrderDetailsEntity OrderDetailsEntity { get; set; }
+
+    public ICollection<ImageEntity> Images => _images;
+    private readonly List<ImageEntity> _images;
+
     public ProductEntity()
     {
     }
@@ -28,6 +35,8 @@ public sealed class ProductEntity
         Guid? categoryId)
     {
         Id = Guid.NewGuid();
+        _images = new List<ImageEntity>();
+        
         Name = name;
         Description = description;
         Price = price;

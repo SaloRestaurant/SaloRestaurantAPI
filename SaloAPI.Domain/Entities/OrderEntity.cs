@@ -14,6 +14,10 @@ public sealed class OrderEntity
     public int Total { get; set; }
     
     public Guid? UserId { get; set; }
+    
+    public UserEntity UserEntity { get; set; }
+    
+    public OrderDetailsEntity OrderDetailsEntity { get; set; }
 
     public OrderEntity()
     {
@@ -26,6 +30,7 @@ public sealed class OrderEntity
         Guid? userId)
     {
         Id = Guid.NewGuid();
+        
         Date = date;
         Status = status;
         Total = total;
