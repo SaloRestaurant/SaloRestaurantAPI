@@ -62,4 +62,12 @@ public sealed class UserEntity
 
         return newUser;
     }
+    
+    public void UpdatePassword(byte[] passwordHash, byte[] passwordSalt)
+    {
+        PasswordHash = passwordHash;
+        PasswordSalt = passwordSalt;
+
+        new UserEntityValidator().ValidateAndThrow(this);
+    }
 }

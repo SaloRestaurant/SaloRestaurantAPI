@@ -12,7 +12,7 @@ namespace SaloAPI.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AdministratorEntity",
+                name: "administrators",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,7 +28,7 @@ namespace SaloAPI.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryEntity",
+                name: "categories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -40,7 +40,7 @@ namespace SaloAPI.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserEntity",
+                name: "users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -57,7 +57,7 @@ namespace SaloAPI.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductEntity",
+                name: "products",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -73,13 +73,13 @@ namespace SaloAPI.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ProductEntity_CategoryEntity_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "CategoryEntity",
+                        principalTable: "categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DeliveryAddressEntity",
+                name: "delivery_addresses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -96,13 +96,13 @@ namespace SaloAPI.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_DeliveryAddressEntity_UserEntity_UserId",
                         column: x => x.UserId,
-                        principalTable: "UserEntity",
+                        principalTable: "users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderEntity",
+                name: "orders",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -117,13 +117,13 @@ namespace SaloAPI.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_OrderEntity_UserEntity_UserId",
                         column: x => x.UserId,
-                        principalTable: "UserEntity",
+                        principalTable: "users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ImageEntity",
+                name: "images",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -136,13 +136,13 @@ namespace SaloAPI.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ImageEntity_ProductEntity_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "ProductEntity",
+                        principalTable: "products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetailsEntity",
+                name: "order_details",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -156,64 +156,64 @@ namespace SaloAPI.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_OrderDetailsEntity_OrderEntity_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "OrderEntity",
+                        principalTable: "orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_OrderDetailsEntity_ProductEntity_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "ProductEntity",
+                        principalTable: "products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryEntity_Name",
-                table: "CategoryEntity",
+                table: "categories",
                 column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeliveryAddressEntity_UserId",
-                table: "DeliveryAddressEntity",
+                table: "delivery_addresses",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImageEntity_ProductId",
-                table: "ImageEntity",
+                table: "images",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetailsEntity_OrderId",
-                table: "OrderDetailsEntity",
+                table: "order_details",
                 column: "OrderId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetailsEntity_ProductId",
-                table: "OrderDetailsEntity",
+                table: "order_details",
                 column: "ProductId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderEntity_UserId",
-                table: "OrderEntity",
+                table: "orders",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductEntity_CategoryId",
-                table: "ProductEntity",
+                table: "products",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductEntity_Name",
-                table: "ProductEntity",
+                table: "products",
                 column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserEntity_Email",
-                table: "UserEntity",
+                table: "users",
                 column: "Email",
                 unique: true);
         }
@@ -222,28 +222,28 @@ namespace SaloAPI.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AdministratorEntity");
+                name: "administrators");
 
             migrationBuilder.DropTable(
-                name: "DeliveryAddressEntity");
+                name: "delivery_addresses");
 
             migrationBuilder.DropTable(
-                name: "ImageEntity");
+                name: "images");
 
             migrationBuilder.DropTable(
-                name: "OrderDetailsEntity");
+                name: "order_details");
 
             migrationBuilder.DropTable(
-                name: "OrderEntity");
+                name: "orders");
 
             migrationBuilder.DropTable(
-                name: "ProductEntity");
+                name: "products");
 
             migrationBuilder.DropTable(
-                name: "UserEntity");
+                name: "users");
 
             migrationBuilder.DropTable(
-                name: "CategoryEntity");
+                name: "categories");
         }
     }
 }
