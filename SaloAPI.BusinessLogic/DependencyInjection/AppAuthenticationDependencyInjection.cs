@@ -13,16 +13,14 @@ public static class AppAuthenticationDependencyInjection
 {
     public static IServiceCollection AddAppAuthentication(
         this IServiceCollection services,
-        string mangoJwtSignKey,
-        string mangoJwtIssuer,
-        string mangoJwtAudience)
+        string saloJwtSignKey)
     {
         if (services == null)
         {
             throw new ArgumentNullException(nameof(services));
         }
 
-        var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(mangoJwtSignKey));
+        var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(saloJwtSignKey));
 
         services.AddAuthentication(options =>
         {
@@ -32,7 +30,7 @@ public static class AppAuthenticationDependencyInjection
         {
             options.RequireHttpsMetadata = false;
             options.TokenValidationParameters = new TokenValidationParameters
-            {&&&&&
+            {
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = true,

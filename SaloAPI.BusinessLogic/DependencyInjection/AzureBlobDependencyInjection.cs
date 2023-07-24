@@ -9,19 +9,19 @@ public static class AzureBlobDependencyInjection
 {
     public static IServiceCollection AddAzureBlobServices(
         this IServiceCollection services,
-        string mangoBlobUrl,
-        string mangoBlobContainerName,
-        string mangoBlobAccess)
+        string saloBlobUrl,
+        string saloBlobContainerName,
+        string saloBlobAccess)
     {
-        var blobClient = new BlobServiceClient(mangoBlobUrl);
+        var blobClient = new BlobServiceClient(saloBlobUrl);
 
-        var mangoBlobService = new BlobServiceSettings(mangoBlobContainerName, mangoBlobAccess);
+        var saloBlobService = new BlobServiceSettings(saloBlobContainerName, saloBlobAccess);
 
-        services.AddSingleton(_ => blobClient);
+        services.AddSingleton(blobClient);
 
-        services.AddSingleton<IBlobServiceSettings, BlobServiceSettings>(_ => mangoBlobService);
+        services.AddSingleton<IBlobServiceSettings, BlobServiceSettings>(_ => saloBlobService);
 
-        services.AddScoped<IBlobService, BlobService>(_ => new BlobService(blobClient, mangoBlobService));
+        services.AddScoped<IBlobService, BlobService>(_ => new BlobService(blobClient, saloBlobService));
 
         return services;
     }
