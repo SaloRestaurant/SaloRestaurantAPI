@@ -5,7 +5,7 @@ namespace SaloAPI.Application.Services;
 public class JwtGeneratorSettings : IJwtGeneratorSettings
 {
     public JwtGeneratorSettings(
-        string saloJwtSignKey, 
+        string saloJwtSignKey,
         int saloJwtLifetimeDays)
     {
         SaloJwtSignKey = saloJwtSignKey;

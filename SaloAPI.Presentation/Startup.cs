@@ -11,7 +11,7 @@ namespace SaloAPI.Presentation;
 public class Startup
 {
     private readonly IConfiguration configuration;
-    
+
     public Startup(IConfiguration configuration)
     {
         this.configuration = configuration;
@@ -24,11 +24,11 @@ public class Startup
             options.JsonSerializerOptions.WriteIndented = true;
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         });
-        
+
         var databaseUrl = ConfigurationHelper.TryGetFromEnvironment(EnvironmentConstants.DatabaseUrl, configuration);
-        
+
         services.AddDatabaseContextServices(databaseUrl);
-        
+
         services.AddSingleton<IVersionService, VersionService>();
 
         services.AddSwaggerGen(c =>
@@ -39,11 +39,7 @@ public class Startup
                     Title = "",
                     Version = "v1",
                     Description = "",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "GitHub",
-                        Url = new Uri("???")
-                    }
+                    Contact = new OpenApiContact { Name = "GitHub", Url = new Uri("???") }
                 });
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -51,7 +47,6 @@ public class Startup
         });
 
         services.AddCors();
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -79,7 +74,7 @@ public class Startup
         });
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        
+
         app.MigrateDatabase();
     }
 }

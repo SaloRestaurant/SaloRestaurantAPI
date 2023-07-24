@@ -11,8 +11,8 @@ public class ChangePasswordCommandHandler
     : IRequestHandler<ChangePasswordCommand, Result<ResponseBase>>
 {
     private readonly SaloDbContext dbContext;
-    private readonly ResponseFactory<ResponseBase> responseFactory;
     private readonly IPasswordService passwordService;
+    private readonly ResponseFactory<ResponseBase> responseFactory;
 
     public ChangePasswordCommandHandler(
         SaloDbContext dbContext,

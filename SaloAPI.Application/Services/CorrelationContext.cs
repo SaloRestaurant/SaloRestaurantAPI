@@ -1,7 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using SaloAPI.Application.Interfaces;
-using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SaloAPI.Application.Services;
 

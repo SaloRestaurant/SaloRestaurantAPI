@@ -15,11 +15,7 @@ public record TokensResponse : ResponseBase
         {
             Message = ResponseMessageCodes.Success,
             Success = true,
-            Tokens = new Tokens
-            {
-                AccessToken = accessToken,
-                UserId = userId,
-            },
+            Tokens = new Tokens { AccessToken = accessToken, UserId = userId }
         };
     }
 }

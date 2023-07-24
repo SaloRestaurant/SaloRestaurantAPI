@@ -10,20 +10,14 @@ using System.Net;
 namespace SaloAPI.Presentation.Controllers;
 
 /// <summary>
-/// Base controller class. Encapsulates common logic.
+///     Base controller class. Encapsulates common logic.
 /// </summary>
 public class ApiControllerBase<TController> : ControllerBase where TController : ControllerBase
 {
-    protected IMediator Mediator { get; }
-
-    protected IMapper Mapper { get; }
-
-    protected ICorrelationContext CorrelationContext { get; }
-
     private readonly ILogger<TController> _logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ApiControllerBase"/> class.
+    ///     Initializes a new instance of the <see cref="ApiControllerBase" /> class.
     /// </summary>
     /// <param name="mediator">Mediator instance.</param>
     /// <param name="mapper">Automapper instance.</param>
@@ -38,13 +32,19 @@ public class ApiControllerBase<TController> : ControllerBase where TController :
         _logger = logger;
     }
 
+    protected IMediator Mediator { get; }
+
+    protected IMapper Mapper { get; }
+
+    protected ICorrelationContext CorrelationContext { get; }
+
     /// <summary>
-    /// Common request logic over all controllers.
+    ///     Common request logic over all controllers.
     /// </summary>
     /// <typeparam name="TResponse">Error data structure.</typeparam>
     /// <param name="request">Generic request type.</param>
     /// <param name="cancellationToken">Cancellation token instance.</param>
-    /// <returns>A <see cref="Task{TResult}"/> Representing the result of the asynchronous operation.</returns>
+    /// <returns>A <see cref="Task{TResult}" /> Representing the result of the asynchronous operation.</returns>
     [NonAction]
     protected async Task<IActionResult> RequestAsync<TResponse>(
         IRequest<Result<TResponse>> request,

@@ -7,8 +7,8 @@ namespace SaloAPI.Presentation.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {
-    private readonly RequestDelegate next;
     private readonly ILogger<ExceptionHandlingMiddleware> logger;
+    private readonly RequestDelegate next;
 
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
@@ -35,8 +35,8 @@ public class ExceptionHandlingMiddleware
             StatusCode = exception switch
             {
                 ValidationException => HttpStatusCode.BadRequest,
-                _ => HttpStatusCode.InternalServerError,
-            },
+                _ => HttpStatusCode.InternalServerError
+            }
         };
 
         await ReturnErrorResponseAsync(context, errorContext);
@@ -51,15 +51,15 @@ public class ExceptionHandlingMiddleware
 
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)errorContext.StatusCode;
-        
+
         LoggingHelper.LoggerError(logger, loggerMessage, errorContext.Exception);
-        
+
         await context.Response.WriteAsync(new ErrorResponse
         {
             Success = false,
             ErrorMessage = errorContext.ErrorMessage,
             ErrorDetails = errorDetails,
-            StatusCode = errorContext.StatusCode,
+            StatusCode = errorContext.StatusCode
         }.ToString());
     }
 }

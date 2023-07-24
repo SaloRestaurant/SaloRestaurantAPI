@@ -11,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace SaloAPI.Presentation.Controllers;
 
 /// <summary>
-/// Controller responsible for User Entity.
+///     Controller responsible for User Entity.
 /// </summary>
 [ApiController]
 [Route("api/users")]
@@ -19,7 +19,7 @@ public class UsersController : ApiControllerBase<UsersController>, IUsersControl
 {
     public UsersController(
         IMediator mediator,
-        IMapper mapper, 
+        IMapper mapper,
         ICorrelationContext correlationContext,
         ILogger<UsersController> logger)
         : base(mediator, mapper, correlationContext, logger)
@@ -27,7 +27,7 @@ public class UsersController : ApiControllerBase<UsersController>, IUsersControl
     }
 
     /// <summary>
-    /// Registers user in the system.
+    ///     Registers user in the system.
     /// </summary>
     /// <param name="request">Request instance.</param>
     /// <param name="cancellationToken">Cancellation token instance.</param>
@@ -49,7 +49,7 @@ public class UsersController : ApiControllerBase<UsersController>, IUsersControl
     }
 
     /// <summary>
-    /// Changes password by current password.
+    ///     Changes password by current password.
     /// </summary>
     /// <param name="request">Request instance.</param>
     /// <param name="cancellationToken">Cancellation Token Instance.</param>
@@ -68,10 +68,10 @@ public class UsersController : ApiControllerBase<UsersController>, IUsersControl
         var userId = CorrelationContext.GetUserId();
 
         var command = new ChangePasswordCommand(
-            UserId: userId,
-            CurrentPassword: request.CurrentPassword,
-            NewPassword: request.NewPassword,
-            RepeatNewPassword: request.RepeatNewPassword);
+            userId,
+            request.CurrentPassword,
+            request.NewPassword,
+            request.RepeatNewPassword);
 
         return await RequestAsync(command, cancellationToken);
     }

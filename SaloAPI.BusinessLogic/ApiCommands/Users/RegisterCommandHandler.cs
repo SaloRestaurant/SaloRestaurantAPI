@@ -12,11 +12,11 @@ namespace SaloAPI.BusinessLogic.ApiCommands.Users;
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<TokensResponse>>
 {
+    private readonly IBlobServiceSettings blobServiceSettings;
     private readonly SaloDbContext dbContext;
-    private readonly ResponseFactory<TokensResponse> responseFactory;
     private readonly IJwtGenerator jwtGenerator;
     private readonly IJwtGeneratorSettings jwtGeneratorSettings;
-    private readonly IBlobServiceSettings blobServiceSettings;
+    private readonly ResponseFactory<TokensResponse> responseFactory;
 
     public RegisterCommandHandler(
         SaloDbContext dbContext,
@@ -44,7 +44,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<To
 
             return responseFactory.ConflictResponse(errorMessage, details);
         }
-        
+
         var hmac = new HMACSHA512();
 
         var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
@@ -67,7 +67,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<To
         var response = TokensResponse.FromSuccess(
             accessToken,
             newUser.Id);
-        
+
         var result = responseFactory.SuccessResponse(response);
 
         return result;

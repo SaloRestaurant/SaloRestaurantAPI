@@ -13,10 +13,8 @@ public record RegisterRequest
         Email = email;
         Password = password;
     }
-    
-    [DefaultValue("MyUniqueEmail")]
-    public string Email { get; }
 
-    [DefaultValue("x[?6dME#xrp=nr7q")]
-    public string Password { get; }
+    [DefaultValue("MyUniqueEmail")] public string Email { get; }
+
+    [DefaultValue("x[?6dME#xrp=nr7q")] public string Password { get; }
 }

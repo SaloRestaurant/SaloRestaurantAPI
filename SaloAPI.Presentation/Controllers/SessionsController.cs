@@ -11,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace SaloAPI.Presentation.Controllers;
 
 /// <summary>
-/// Controller responsible for Sessions Entity.
+///     Controller responsible for Sessions Entity.
 /// </summary>
 [ApiController]
 [Route("api/sessions")]
@@ -27,7 +27,7 @@ public class SessionsController : ApiControllerBase<SessionsController>, ISessio
     }
 
     /// <summary>
-    /// Logins to the system. Returns the access token.
+    ///     Logins to the system. Returns the access token.
     /// </summary>
     /// <param name="request">LoginRequest instance.</param>
     /// <param name="cancellationToken">Cancellation token instance.</param>

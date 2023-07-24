@@ -35,7 +35,7 @@ public static class AppAuthenticationDependencyInjection
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 IssuerSigningKey = signingKey,
-                ValidateIssuerSigningKey = true,
+                ValidateIssuerSigningKey = true
             };
             options.Events = new JwtBearerEvents
             {
@@ -53,9 +53,9 @@ public static class AppAuthenticationDependencyInjection
                         StatusCode = HttpStatusCode.Unauthorized,
                         Success = false,
                         ErrorMessage = unauthorized,
-                        ErrorDetails = ResponseMessageCodes.ErrorDictionary[unauthorized],
+                        ErrorDetails = ResponseMessageCodes.ErrorDictionary[unauthorized]
                     }.ToString());
-                },
+                }
             };
         });
 

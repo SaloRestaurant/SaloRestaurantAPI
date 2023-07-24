@@ -13,8 +13,8 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<TokensRe
     private readonly SaloDbContext dbContext;
     private readonly IJwtGenerator jwtGenerator;
     private readonly IJwtGeneratorSettings jwtGeneratorSettings;
-    private readonly ResponseFactory<TokensResponse> responseFactory;
     private readonly IPasswordService passwordService;
+    private readonly ResponseFactory<TokensResponse> responseFactory;
 
     public LoginCommandHandler(
         IJwtGenerator jwtGenerator,

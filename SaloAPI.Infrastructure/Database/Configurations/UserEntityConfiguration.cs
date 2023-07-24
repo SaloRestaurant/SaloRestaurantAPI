@@ -11,7 +11,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.ToTable(nameof(UserEntity));
 
         builder.HasKey(x => x.Id);
-        
+
         builder.HasIndex(x => x.Email).IsUnique();
 
         builder.Property(x => x.FirstName).HasMaxLength(50).IsRequired();

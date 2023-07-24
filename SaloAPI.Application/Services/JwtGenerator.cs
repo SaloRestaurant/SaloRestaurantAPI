@@ -28,8 +28,8 @@ public class JwtGenerator : IJwtGenerator
     {
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Jti, userEntity.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, userEntity.Email),
+            new(JwtRegisteredClaimNames.Jti, userEntity.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, userEntity.Email)
         };
 
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
@@ -38,7 +38,7 @@ public class JwtGenerator : IJwtGenerator
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(lifetimeMinutes),
-            SigningCredentials = credentials,
+            SigningCredentials = credentials
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

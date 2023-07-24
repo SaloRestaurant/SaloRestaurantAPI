@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using SaloAPI.Domain.Enums;
 
 namespace SaloAPI.Domain.Entities;
 

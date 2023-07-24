@@ -12,9 +12,7 @@ public record LoginRequest
         Password = password;
     }
 
-    [DefaultValue("MyUniqueEmail")]
-    public string Email { get; }
+    [DefaultValue("MyUniqueEmail")] public string Email { get; }
 
-    [DefaultValue("x[?6dME#xrp=nr7q")]
-    public string Password { get; }
+    [DefaultValue("x[?6dME#xrp=nr7q")] public string Password { get; }
 }

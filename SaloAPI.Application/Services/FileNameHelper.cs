@@ -3,7 +3,7 @@
 public static class FileNameHelper
 {
     /// <summary>
-    /// Generates unique file name adding guid to its name.
+    ///     Generates unique file name adding guid to its name.
     /// </summary>
     public static string CreateUniqueFileName(string fileName)
     {

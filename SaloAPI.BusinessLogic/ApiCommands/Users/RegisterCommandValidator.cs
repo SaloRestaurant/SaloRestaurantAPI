@@ -13,7 +13,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .WithMessage("FirstName must only contain letters.")
             .Length(2, 50)
             .WithMessage("FirstName must be between 2 and 50 characters.");
-        
+
         RuleFor(x => x.LastName)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
@@ -21,7 +21,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .WithMessage("LastName must only contain letters.")
             .Length(2, 50)
             .WithMessage("LastName must be between 2 and 50 characters.");
-        
+
         RuleFor(x => x.Email)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
@@ -29,7 +29,7 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .WithMessage("Email must contain @.")
             .Length(5, 50)
             .WithMessage("Email must be between 5 and 50 characters.");
-        
+
         RuleFor(x => x.PhoneNumber)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
