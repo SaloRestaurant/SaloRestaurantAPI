@@ -21,7 +21,7 @@ public class JwtGenerator : IJwtGenerator
 
     public string GenerateJwtToken(UserEntity userEntity)
     {
-        return GenerateJwtToken(userEntity, jwtGeneratorSettings.SaloJwtLifetimeMinutes);
+        return GenerateJwtToken(userEntity, jwtGeneratorSettings.SaloJwtLifetimeDays);
     }
 
     private string GenerateJwtToken(UserEntity userEntity, int lifetimeMinutes)

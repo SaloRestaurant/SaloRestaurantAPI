@@ -4,5 +4,5 @@ public interface IJwtGeneratorSettings
 {
     string SaloJwtSignKey { get; }
 
-    int SaloJwtLifetimeMinutes { get; }
+    int SaloJwtLifetimeDays { get; }
 }

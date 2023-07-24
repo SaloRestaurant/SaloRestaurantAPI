@@ -6,12 +6,12 @@ public class JwtGeneratorSettings : IJwtGeneratorSettings
 {
     public JwtGeneratorSettings(
         string saloJwtSignKey, 
-        int saloJwtLifetimeMinutes)
+        int saloJwtLifetimeDays)
     {
         SaloJwtSignKey = saloJwtSignKey;
-        SaloJwtLifetimeMinutes = saloJwtLifetimeMinutes;
+        SaloJwtLifetimeDays = saloJwtLifetimeDays;
     }
 
     public string SaloJwtSignKey { get; }
-    public int SaloJwtLifetimeMinutes { get; }
+    public int SaloJwtLifetimeDays { get; }
 }
