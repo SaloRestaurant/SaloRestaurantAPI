@@ -1,10 +1,11 @@
-﻿using SaloAPI.Domain.Entities;
+﻿using SaloAPI.Application.Interfaces;
+using SaloAPI.Domain.Entities;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace SaloAPI.Application.Services;
 
-public class PasswordService
+public class PasswordService : IPasswordService
 {
     public bool ValidateCredentials(UserEntity user, string currentPassword)
     {

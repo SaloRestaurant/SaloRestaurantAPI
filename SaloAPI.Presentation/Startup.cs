@@ -1,8 +1,16 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.OpenApi.Models;
 using SaloAPI.Application.Interfaces;
 using SaloAPI.Application.Services;
+using SaloAPI.BusinessLogic.ApiCommands.Sessions;
+using SaloAPI.BusinessLogic.ApiCommands.Users;
 using SaloAPI.BusinessLogic.DependencyInjection;
+using SaloAPI.BusinessLogic.Pipelines;
+using SaloAPI.BusinessLogic.Responses;
 using SaloAPI.Domain.Constants;
+using SaloAPI.Presentation.Controllers;
 using System.Reflection;
 using System.Text.Json;
 
@@ -11,10 +19,20 @@ namespace SaloAPI.Presentation;
 public class Startup
 {
     private readonly IConfiguration configuration;
+    
+    private readonly string version;
+    
+    private readonly string swaggerTitle;
+    
+    private const string CorsPolicy = "SaloCorsPolicy";
 
     public Startup(IConfiguration configuration)
     {
+        var versionService = new VersionService();
+        
         this.configuration = configuration;
+        version = versionService.GetVersion();
+        swaggerTitle = $"SaloAPI v{version}";
     }
 
     public void ConfigureServices(IServiceCollection services)
@@ -27,26 +45,47 @@ public class Startup
 
         var databaseUrl = ConfigurationHelper.TryGetFromEnvironment(EnvironmentConstants.DatabaseUrl, configuration);
 
+        var jwtSignKey = configuration[EnvironmentConstants.JwtSignKey];
+
+        const int jwtLifetimeDays = EnvironmentConstants.JwtLifetimeDays;
+
         services.AddDatabaseContextServices(databaseUrl);
+        
+        services.AddSwagger(swaggerTitle, version);
+        
+        services.AddJwtGeneratorServices(
+            jwtSignKey,
+            jwtLifetimeDays);
 
         services.AddSingleton<IVersionService, VersionService>();
+        
+        services.AddSingleton<IPasswordService, PasswordService>();
+        
+        services.AddValidatorsFromAssembly(typeof(LoginCommandValidator).Assembly);
+        
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1",
-                new OpenApiInfo
-                {
-                    Title = "",
-                    Version = "v1",
-                    Description = "",
-                    Contact = new OpenApiContact { Name = "GitHub", Url = new Uri("???") }
-                });
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            c.IncludeXmlComments(xmlPath);
-        });
+        services.AddTransient(typeof(ResponseFactory<>));
+        
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterCommandHandler).Assembly));
+        
+        services.AddAppAuthorization();
+        
+        services.AddAppAuthentication(jwtSignKey);
+        
+        services.AddLogging();
 
-        services.AddCors();
+        services.AddHttpClient();
+        
+        services.ConfigureCors(configuration, CorsPolicy);
+        
+        services.AddHttpContextAccessor();
+
+        services.AddTransient<ICorrelationContext, CorrelationContext>();
+
+        services.AddAutoMapper(typeof(ApiControllerBase<AppInfoController>));
+
+        services.AddMvc();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,18 +98,19 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+        
+        app.UseCors(CorsPolicy);
+
         app.UseSwagger();
-        app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "SaloRestaurant API"); });
-
-        app.UseAuthentication();
+        
+        app.UseSwaggerUI(c => c.SwaggerEndpoint($"/swagger/v{version}/swagger.json", swaggerTitle));
+        
         app.UseAuthorization();
-
-        app.UseCors(builder =>
+        
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
         {
-            builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                               ForwardedHeaders.XForwardedProto,
         });
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
