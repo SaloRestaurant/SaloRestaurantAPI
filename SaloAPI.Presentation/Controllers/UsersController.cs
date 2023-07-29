@@ -32,7 +32,7 @@ public class UsersController : ApiControllerBase<UsersController>, IUsersControl
     /// <param name="request">Request instance.</param>
     /// <param name="cancellationToken">Cancellation token instance.</param>
     /// <returns>Possible codes: 200, 400, 409.</returns>
-    [HttpPost]
+    [HttpPost("signup")]
     [AllowAnonymous]
     [SwaggerOperation(
         Description = "Registers user in the system.",

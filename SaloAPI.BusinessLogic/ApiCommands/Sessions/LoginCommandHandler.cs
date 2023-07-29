@@ -9,10 +9,8 @@ namespace SaloAPI.BusinessLogic.ApiCommands.Sessions;
 
 public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<TokensResponse>>
 {
-    private readonly IBlobServiceSettings blobServiceSettings;
     private readonly SaloDbContext dbContext;
     private readonly IJwtGenerator jwtGenerator;
-    private readonly IJwtGeneratorSettings jwtGeneratorSettings;
     private readonly IPasswordService passwordService;
     private readonly ResponseFactory<TokensResponse> responseFactory;
 
@@ -20,15 +18,11 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<TokensRe
         IJwtGenerator jwtGenerator,
         SaloDbContext dbContext,
         ResponseFactory<TokensResponse> responseFactory,
-        IJwtGeneratorSettings jwtGeneratorSettings,
-        IBlobServiceSettings blobServiceSettings,
         IPasswordService passwordService)
     {
         this.jwtGenerator = jwtGenerator;
         this.dbContext = dbContext;
         this.responseFactory = responseFactory;
-        this.jwtGeneratorSettings = jwtGeneratorSettings;
-        this.blobServiceSettings = blobServiceSettings;
         this.passwordService = passwordService;
     }
 

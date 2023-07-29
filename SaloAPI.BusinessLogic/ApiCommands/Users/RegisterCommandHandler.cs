@@ -12,24 +12,18 @@ namespace SaloAPI.BusinessLogic.ApiCommands.Users;
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<TokensResponse>>
 {
-    private readonly IBlobServiceSettings blobServiceSettings;
     private readonly SaloDbContext dbContext;
     private readonly IJwtGenerator jwtGenerator;
-    private readonly IJwtGeneratorSettings jwtGeneratorSettings;
     private readonly ResponseFactory<TokensResponse> responseFactory;
 
     public RegisterCommandHandler(
         SaloDbContext dbContext,
         IJwtGenerator jwtGenerator,
-        IJwtGeneratorSettings jwtGeneratorSettings,
-        ResponseFactory<TokensResponse> responseFactory,
-        IBlobServiceSettings blobServiceSettings)
+        ResponseFactory<TokensResponse> responseFactory)
     {
         this.dbContext = dbContext;
         this.responseFactory = responseFactory;
         this.jwtGenerator = jwtGenerator;
-        this.jwtGeneratorSettings = jwtGeneratorSettings;
-        this.blobServiceSettings = blobServiceSettings;
     }
 
     public async Task<Result<TokensResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)

@@ -8,12 +8,12 @@ public static class JwtGeneratorDependencyInjection
 {
     public static IServiceCollection AddJwtGeneratorServices(
         this IServiceCollection services,
-        string mangoJwtSignKey,
-        int mangoJwtLifetimeMinutes)
+        string saloJwtSignKey,
+        int saloJwtLifetimeMinutes)
     {
         var jwtGeneratorSettings = new JwtGeneratorSettings(
-            mangoJwtSignKey,
-            mangoJwtLifetimeMinutes);
+            saloJwtSignKey,
+            saloJwtLifetimeMinutes);
 
         services.AddSingleton<IJwtGeneratorSettings, JwtGeneratorSettings>(_ => jwtGeneratorSettings);
         services.AddScoped<IJwtGenerator, JwtGenerator>(_ => new JwtGenerator(jwtGeneratorSettings));
