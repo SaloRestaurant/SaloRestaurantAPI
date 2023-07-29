@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using SaloAPI.Application.Services;
 using SaloAPI.Domain.Constants;
 using SaloAPI.Infrastructure.Database.Exceptions;
-using System.Data;
 
 namespace SaloAPI.Infrastructure.Database;
 

@@ -12,7 +12,7 @@ using SaloAPI.Infrastructure.Database;
 namespace SaloAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(SaloDbContext))]
-    [Migration("20230715010327_Initial")]
+    [Migration("20230729103100_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

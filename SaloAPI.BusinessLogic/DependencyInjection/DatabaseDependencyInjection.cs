@@ -17,7 +17,11 @@ public static class DatabaseDependencyInjection
 
         services.AddDbContext<SaloDbContext>(options =>
         {
-            options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString, sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30),
+                    null);
+            });
         });
 
         return services;

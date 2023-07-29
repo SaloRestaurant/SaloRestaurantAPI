@@ -3,17 +3,17 @@
 public enum OrderStatus
 {
     /// <summary>
-    /// Order is unconfirmed
+    ///     Order is unconfirmed
     /// </summary>
     Unconfirmed = 1,
-    
+
     /// <summary>
-    /// Order is confirmed and preparing
+    ///     Order is confirmed and preparing
     /// </summary>
     Confirmed = 2,
 
     /// <summary>
-    /// Order is ready to be delivered
+    ///     Order is ready to be delivered
     /// </summary>
-    Ready = 3,
+    Ready = 3
 }
