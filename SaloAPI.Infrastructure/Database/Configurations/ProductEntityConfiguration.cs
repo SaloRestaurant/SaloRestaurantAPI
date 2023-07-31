@@ -27,8 +27,8 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
             .WithMany(x => x.Products)
             .HasForeignKey(x => x.CategoryId);
 
-        builder.HasMany(x => x.Images)
+        builder.HasOne(x => x.ImageEntity)
             .WithOne(x => x.ProductEntity)
-            .HasForeignKey(x => x.ProductId);
+            .HasForeignKey<ImageEntity>(x => x.ProductId);
     }
 }

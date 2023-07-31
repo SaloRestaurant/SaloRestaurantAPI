@@ -16,7 +16,7 @@ public class ImageEntityConfiguration : IEntityTypeConfiguration<ImageEntity>
         builder.Property(x => x.ProductId).IsRequired();
 
         builder.HasOne(x => x.ProductEntity)
-            .WithMany(x => x.Images)
-            .HasForeignKey(x => x.ProductId);
+            .WithOne(x => x.ImageEntity)
+            .HasForeignKey<ImageEntity>(x => x.ProductId);
     }
 }

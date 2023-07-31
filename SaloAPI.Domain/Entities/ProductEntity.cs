@@ -4,7 +4,7 @@ namespace SaloAPI.Domain.Entities;
 
 public sealed class ProductEntity
 {
-    private readonly List<ImageEntity> _images;
+    public ImageEntity ImageEntity { get; set; }
 
     public ProductEntity()
     {
@@ -18,7 +18,6 @@ public sealed class ProductEntity
         Guid? categoryId)
     {
         Id = Guid.NewGuid();
-        _images = new List<ImageEntity>();
 
         Name = name;
         Description = description;
@@ -44,8 +43,6 @@ public sealed class ProductEntity
     public CategoryEntity CategoryEntity { get; set; }
 
     public OrderDetailsEntity OrderDetailsEntity { get; set; }
-
-    public ICollection<ImageEntity> Images => _images;
 
     public static ProductEntity Create(
         string name,
