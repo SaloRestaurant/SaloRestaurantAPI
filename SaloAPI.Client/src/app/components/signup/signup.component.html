@@ -1,0 +1,50 @@
+<div class='outer'>
+  <div class='container'>
+    <div class='row'>
+      <div class='offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-4'>
+        <div class='card border bg-white'>
+          <div class='card-header'>
+            <h3 class='pt-3 font-weight-bold'>Sign up</h3>
+          </div>
+          <div class='card-body p-3'>
+            <form>
+              <div class='mb-3'>
+                <div class='input-field'>
+                  <span class='fa fa-user p-2'></span>
+                  <input type='text' placeholder='FirstName'>
+                </div>
+              </div>
+              <div class='mb-3'>
+                <div class='input-field'>
+                  <span class='fa fa-user p-2'></span>
+                  <input type='text' placeholder='LastName'>
+                </div>
+              </div>
+              <div class='mb-3'>
+                <div class='input-field'>
+                  <span class='fa fa-solid fa-phone p-2'></span>
+                  <input type='text' placeholder='PhoneNumber'>
+                </div>
+              </div>
+              <div class='mb-3'>
+                <div class='input-field'>
+                  <span class='fa fa-solid fa-envelope p-2'></span>
+                  <input type='text' placeholder='Email'>
+                </div>
+              </div>
+              <div class='mb-3'>
+                <div class='input-field'>
+                  <span class='fa fa-lock p-2'></span>
+                  <input [type]='type' placeholder='Password'>
+                  <span (click)="hideShowPassword()" class="fa {{eyeIcon}}"></span>
+                </div>
+              </div>
+              <button type='submit' class='btn btn-primary btn-block mt-4 w-100'>Sign up</button>
+              <div class='text-center pt-4 text-muted'>Already have an account? <a class='forget' routerLink='/login'>Login</a></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
